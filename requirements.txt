@@ -1,0 +1,13 @@
+PyGithub==2.1.1
+openai==1.10.0
+python-dotenv==1.0.0
+pyyaml==6.0.1
+requests==2.31.0
+tiktoken==0.5.1
+anthropic==0.7.1
+gitpython==3.1.40
+beautifulsoup4==4.12.2
+markdown==3.5.1
+gspread==5.12.0
+google-auth==2.25.2
+pyperclip==1.8.2

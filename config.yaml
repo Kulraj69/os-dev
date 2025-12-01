@@ -1,0 +1,77 @@
+# GitHub Issue Hunter Configuration
+
+# Issue labels to search for
+target_labels:
+  - "good first issue"
+  - "help wanted"
+  - "beginner friendly"
+  - "easy"
+  - "first-timers-only"
+  - "good-first-issue"
+
+# Issue states to consider
+issue_states:
+  - "open"
+
+# Exclude issues with these labels
+exclude_labels:
+  - "wontfix"
+  - "duplicate"
+  - "invalid"
+  - "assigned"
+
+# Maximum age of issues to consider (in days)
+max_issue_age_days: 90
+
+# Minimum time between comments on same issue (in hours)
+min_comment_interval_hours: 168  # 1 week
+
+# AI Analysis Settings
+ai_settings:
+  model: "gpt-4-turbo-preview"  # Can be overridden by env var
+  temperature: 0.7
+  max_tokens: 2000
+  
+# Comment template
+comment_template: |
+  Hi there! 👋
+  
+  I've analyzed this issue and would like to contribute a solution. Here's my understanding and proposed approach:
+  
+  ## Problem Analysis
+  {analysis}
+  
+  ## Proposed Solution
+  {solution}
+  
+  ## Implementation Steps
+  {steps}
+  
+  I'd love to work on this! Could you please assign this issue to me? I'm happy to discuss the approach before starting if you have any suggestions.
+  
+  Thanks!
+
+# Request assignment message
+assignment_request: |
+  I'd love to work on this issue! Could you please assign it to me?
+
+# Repository file patterns to analyze
+file_patterns_to_analyze:
+  - "*.py"
+  - "*.js"
+  - "*.ts"
+  - "*.go"
+  - "*.java"
+  - "*.md"
+  - "*.json"
+  - "*.yaml"
+  - "*.yml"
+
+# Maximum number of files to fetch per issue
+max_files_to_analyze: 5
+
+# Log configuration
+logging:
+  level: "INFO"
+  file: "logs/agent.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
