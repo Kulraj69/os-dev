@@ -22,9 +22,6 @@ logger = logging.getLogger(__name__)
 def setup_sheets_client():
     """Setup Google Sheets client"""
     creds_file = Path("google_credentials.json")
-    if not creds_file.exists():
-        logger.error("google_credentials.json not found")
-        return None
 
     scopes = [
         'https://www.googleapis.com/auth/spreadsheets',

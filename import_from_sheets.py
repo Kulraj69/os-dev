@@ -34,10 +34,6 @@ def import_from_google_sheets(sheet_url: str):
     
     # Load credentials
     creds_file = Path('google_credentials.json')
-    if not creds_file.exists():
-        print("❌ google_credentials.json not found")
-        print("   Place your Google service account credentials in this file")
-        return []
     
         # Authenticate
         # Define scopes
