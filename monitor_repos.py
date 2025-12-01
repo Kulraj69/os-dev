@@ -201,7 +201,19 @@ def main():
         stats = get_repo_stats(gh, repo_url)
         
         if stats:
-            # Update columns
+            # Prepare row data
+            # We need to preserve existing data in other columns
+            # So we'll construct a list of values for the specific columns we want to update
+            
+            # Find the range of columns we are updating
+            # We are updating: Last Scanned, Latest Activity, New Issues (7d), Active Contributors (7d), Stars, Good First Issues
+            # These might not be contiguous, so batch update of a range is tricky if they are scattered.
+            # However, usually they are appended at the end.
+            
+            # Let's try to update cells individually but with a sleep to avoid rate limit?
+            # Or better, use batch_update.
+            
+            cells = []
             updates = [
                 ('Last Scanned', datetime.now().strftime('%Y-%m-%d %H:%M')),
                 ('Latest Activity', stats['last_pushed'].strftime('%Y-%m-%d')),
@@ -214,10 +226,16 @@ def main():
             for col_name, value in updates:
                 col_idx = header_map.get(col_name)
                 if col_idx:
-                    try:
-                        worksheet.update_cell(i, col_idx, value)
-                    except Exception as e:
-                        logger.error(f"Error updating cell: {e}")
+                    # Create a Cell object
+                    cells.append(gspread.Cell(i, col_idx, value))
+            
+            try:
+                if cells:
+                    worksheet.update_cells(cells)
+                    import time
+                    time.sleep(1.5) # Sleep to respect rate limit (60/min = 1/sec)
+            except Exception as e:
+                logger.error(f"Error updating cells: {e}")
             
             logger.info(f"✅ Updated stats for {repo_url}")
         else:
