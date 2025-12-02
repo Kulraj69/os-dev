@@ -3,7 +3,7 @@ name: Daily Issue Hunter
 on:
   schedule:
     # Run twice daily at 8 AM and 8 PM UTC
-    - cron: '0 8,20 * * *'
+    - cron: '0 8 * * *'
   
   # Allow manual triggers
   workflow_dispatch:
